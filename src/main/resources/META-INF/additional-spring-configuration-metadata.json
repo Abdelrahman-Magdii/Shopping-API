@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "springdoc.api-docs.title",
+      "type": "java.lang.String",
+      "description": "Description for springdoc.api-docs.title."
+  }
+] }
