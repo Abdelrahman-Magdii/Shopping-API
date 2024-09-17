@@ -5,7 +5,6 @@ import com.spring.shopping.security.Jwt.JwtUtils;
 import com.spring.shopping.security.model.LoginResponse;
 import com.spring.shopping.security.model.LoginUserDto;
 import com.spring.shopping.security.model.RegisterUserDto;
-import com.spring.shopping.usermanagement.Dto.AppUserDto;
 import com.spring.shopping.usermanagement.Entity.AppUserEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
