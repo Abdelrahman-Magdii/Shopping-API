@@ -12,7 +12,7 @@ public class AppUserDto extends BaseDto <Long>{
 
     private String userNName;
 
-    private String password;
+//    private String password;
 
     private String phoneNumber;
 

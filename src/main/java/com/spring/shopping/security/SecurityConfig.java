@@ -4,6 +4,7 @@ import com.spring.shopping.security.Jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -23,13 +24,18 @@ public class SecurityConfig {
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    private static final String[] PUBLIC_APIS ={
+            "/api-docs/**", "/swagger-ui/**","/Swagger.html",
+            "/api-docs/swagger-config/**","/api/auth/**"
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .httpBasic().and()
                 .authorizeHttpRequests() // Updated method
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api-docs/**", "/swagger-ui/**","/Swagger.html"," /api-docs/swagger-config/**").permitAll()
+                .requestMatchers(HttpMethod.POST, PUBLIC_APIS).permitAll()
+                .requestMatchers(HttpMethod.GET, PUBLIC_APIS).permitAll()
                 .anyRequest().authenticated() // All other requests require authentication
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -38,7 +44,6 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
-
     }
 
 
